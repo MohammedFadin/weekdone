@@ -1,6 +1,6 @@
 FROM node:12
 
-ENV MONGO_HOST=guestware-mongo MONGO_PORT=27017 MONGO_DB=guestware MONGO_USER=guestware1 MONGO_PASS=guestware1
+ENV MONGO_HOST=weekdone-mongo-mongodb MONGO_PORT=27017 MONGO_DB=weekdone-reviews MONGO_USER=weekdone MONGO_PASS=weekdone
 
 COPY ./ /app
 
