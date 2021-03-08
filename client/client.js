@@ -35,5 +35,5 @@ app.get('/api/entries', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`client guestbook on port ${port}`)
+    console.log(`WeekDone Client App Listening on port ${port}`)
 })
