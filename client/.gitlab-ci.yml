@@ -31,6 +31,7 @@ image-build:
     entrypoint: [""]
   script:
     - ls -la
+    - echo $CHILD_PROJECT_PATH
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CHILD_PROJECT_PATH --dockerfile $CHILD_PROJECT_PATH/Dockerfile --destination $CONTAINER_IMAGE
