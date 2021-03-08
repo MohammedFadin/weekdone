@@ -1,0 +1,6 @@
+trigger_job:
+  trigger:
+    include: client/.gitlab-ci.yml
+  only:
+    changes:
+      - client/
