@@ -1,6 +1,6 @@
 variables:
   APPLICATION_NAME: weekdone-client
-  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/APPLICATION_NAME:$CI_COMMIT_SHORT_SHA
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/$APPLICATION_NAME:$CI_COMMIT_SHORT_SHA
   NAMESPACE: weekdone-dev
 
 stages:
@@ -32,9 +32,10 @@ image-build:
     - ls -la
     - echo $CONTAINER_IMAGE
     - echo $APPLICATION_NAME
+    - echo $CI_REGISTRY_PASSWORD
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR/client --dockerfile Dockerfile --destination registry.gitlab.com/aws-k8s1/weekdone-app/weekdone-client:latest
+    - /kaniko/executor --context $CI_PROJECT_DIR/client --dockerfile Dockerfile --destination $CONTAINER_IMAGE
 
 container_scanning:
   stage: test
