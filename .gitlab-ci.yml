@@ -3,4 +3,4 @@ trigger_job:
     include: client/.gitlab-ci.yml
   only:
     changes:
-      - client/
+      - client/*
