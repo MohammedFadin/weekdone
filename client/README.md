@@ -1,2 +1,2 @@
 ## Client
-Weekdone Client micro-service version 1.0
+Weekdone Client micro-service version for VMware demo session
