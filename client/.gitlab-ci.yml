@@ -30,7 +30,8 @@ image-build:
     entrypoint: [""]
   script:
     - ls -la
-    - $CONTAINER_IMAGE
+    - echo $CONTAINER_IMAGE
+    - echo $APPLICATION_NAME
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR/client --dockerfile Dockerfile --destination registry.gitlab.com/aws-k8s1/weekdone-app/weekdone-client:latest
