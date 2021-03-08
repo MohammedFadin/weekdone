@@ -1,6 +1,13 @@
-trigger_job:
+weekdone-client-trigger:
   trigger:
     include: client/.gitlab-ci.yml
   only:
     changes:
       - client/*
+
+weekdone-server-trigger:
+  trigger:
+    include: server/.gitlab-ci.yml
+  only:
+    changes:
+      - server/*
