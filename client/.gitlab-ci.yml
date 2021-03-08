@@ -1,7 +1,6 @@
 variables:
   APPLICATION_NAME: weekdone-client
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/APPLICATION_NAME:$CI_COMMIT_SHORT_SHA
-  CHILD_PROJECT_PATH: $CI_PROJECT_DIR/client
   NAMESPACE: weekdone-dev
 
 stages:
@@ -31,10 +30,9 @@ image-build:
     entrypoint: [""]
   script:
     - ls -la
-    - echo $CHILD_PROJECT_PATH
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CHILD_PROJECT_PATH --dockerfile $CHILD_PROJECT_PATH/Dockerfile --destination $CONTAINER_IMAGE
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/client/Dockerfile --destination $CONTAINER_IMAGE
 
 container_scanning:
   stage: test
@@ -48,9 +46,8 @@ deploy-stage:
   stage: deploy
   script:
     - helm version
-    - ls -la
-    - sed -i s%IMAGE_TAG_HOLDER%${CONTAINER_IMAGE}%g $CHILD_PROJECT_PATH/chart/values.yaml
-    - helm upgrade --install --wait $APPLICATION_NAME -n $NAMESPACE $CHILD_PROJECT_PATH/chart
+    - sed -i s%IMAGE_TAG_HOLDER%${CONTAINER_IMAGE}%g ./client/chart/values.yaml
+    - helm upgrade --install --wait $APPLICATION_NAME -n $NAMESPACE ./client/chart
 
 dynamic-security-checking:
   image: alpine/helm
