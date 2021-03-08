@@ -1,6 +1,7 @@
 weekdone-client-trigger:
   trigger:
     include: client/.gitlab-ci.yml
+    strategy: depend
   only:
     changes:
       - client/*
@@ -8,6 +9,7 @@ weekdone-client-trigger:
 weekdone-server-trigger:
   trigger:
     include: server/.gitlab-ci.yml
+    strategy: depend
   only:
     changes:
       - server/*
