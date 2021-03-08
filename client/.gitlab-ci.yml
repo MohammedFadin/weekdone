@@ -1,0 +1,64 @@
+variables:
+  APPLICATION_NAME: weekdone-client
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE/APPLICATION_NAME:$CI_COMMIT_SHORT_SHA
+  NAMESPACE: weekdone-dev
+
+stages:
+  - sast
+  - build
+  - test
+  - deploy
+  - dast
+
+include:
+  - template: Container-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  stage: sast
+  image: node:alpine
+  script:
+    - npm ci
+  artifacts:
+    reports:
+      sast: gl-sast-report.json  
+  
+image-build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CONTAINER_IMAGE
+
+container_scanning:
+  stage: test
+  variables:
+    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$APPLICATION_NAME
+    CI_APPLICATION_TAG: $CI_COMMIT_SHORT_SHA
+  allow_failure: true
+
+deploy-stage:
+  image: alpine/helm
+  stage: deploy
+  script:
+    - helm version
+    - sed -i s%IMAGE_TAG_HOLDER%${CONTAINER_IMAGE}%g ./chart/values.yaml
+    - helm upgrade --install --wait $APPLICATION_NAME -n $NAMESPACE ./chart
+
+dynamic-security-checking:
+  image: alpine/helm
+  stage: dast
+  script:
+    - echo "Running OWASP ZIP DAST Tool"
+
+deploy-prod:
+  image: alpine/helm
+  stage: deploy
+  script:
+    -  echo "Approval Granted to deploy to production, deploying started"
+  when: manual
+  only:
+    - master
