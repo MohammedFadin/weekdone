@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: registry.gitlab.com/aws-k8s1/weekdone-app/weekdone-server
+  repository: IMAGE_TAG_HOLDER
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
