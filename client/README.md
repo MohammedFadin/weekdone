@@ -1,3 +1,8 @@
 ## Client
+Weekdone Client micro-service version for VMware demo session
 
-This is the place for your application front-end files.
+## Notes:
+Weekdone client micros-service relies on the following technology stack:
+ - ExpressJS
+ - JQuery
+ - Kubernetes
