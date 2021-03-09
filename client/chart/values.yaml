@@ -40,6 +40,12 @@ service:
   type: NodePort ## AWS ALB supports NodePort type
   port: 80
 
+env:
+##non-sensitve data
+  public:
+    BACKEND_URL: DUMMY
+    BACKEND_PORT: DUMMY
+
 ingress:
   enabled: true
   annotations:

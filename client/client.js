@@ -1,6 +1,6 @@
 const express = require("express")
 const bodyParser = require('body-parser')
-const dotenv = require('dotenv').config()
+// const dotenv = require('dotenv').config()
 const axios = require("axios")
 const health = require("@cloudnative/health-connect")
 const backend_endpoint = process.env.BACKEND_URL+':'+process.env.BACKEND_PORT
