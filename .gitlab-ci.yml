@@ -1,18 +1,17 @@
 weekdone-client-trigger:
-  stage: build
+  stage: deploy
   trigger:
     include: client/.gitlab-ci.yml
     strategy: depend
   only:
     changes:
-      - client/*
-      - client/*/*
+      - client/**/*
 
 weekdone-server-trigger:
-  stage: build
+  stage: deploy
   trigger:
     include: server/.gitlab-ci.yml
     strategy: depend
   only:
     changes:
-      - server/*
+      - server/**/*
