@@ -6,6 +6,7 @@ weekdone-client-trigger:
   only:
     changes:
       - client/*
+      - client/*/*
 
 weekdone-server-trigger:
   stage: build
