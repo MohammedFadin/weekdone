@@ -1,6 +1,7 @@
 FROM node:12
 
-ENV MONGO_HOST=weekdone-mongo-mongodb MONGO_PORT=27017 MONGO_DB=weekdone-reviews MONGO_USER=weekdone MONGO_PASS=weekdone
+## Use ENV when deploying locally
+# ENV MONGO_HOST=weekdone-mongo-mongodb MONGO_PORT=27017 MONGO_DB=weekdone-reviews MONGO_USER= MONGO_PASS=
 
 COPY ./ /app
 

@@ -23,6 +23,13 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+env:
+##non-sensitve data
+  public:
+    MONGO_PORT: 27017
+    MONGO_HOST: weekdone-mongo-mongodb
+    MONGO_DB: weekdone-reviews
+
 podAnnotations: {}
 
 podSecurityContext: {}
