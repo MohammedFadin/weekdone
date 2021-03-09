@@ -3,8 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-  {{- $files := .Files }}
-  {{- range tuple ".env" }}
-  {{ . }}: |-
-{{ $files.Get . | indent 4 }}
+  {{- range $key, $val := .Values.env.public }}
+{{ $key | quote | indent 4 }}: {{ $val | quote }}
   {{- end }}
