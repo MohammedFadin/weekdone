@@ -1,3 +1,6 @@
+### VMware WeekDone Microservices Demo
+Weekdone application is a simple 3 tier application composed of 2 microservices and a single mongodb database.
+
 ### Running the container
 
 ```bash
