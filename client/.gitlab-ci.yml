@@ -7,8 +7,9 @@ stages:
   - sast
   - build
   - test
-  - deploy
+  - deploy-staging
   - dast
+  - deploy-prod
 
 include:
   - template: Container-Scanning.gitlab-ci.yml
@@ -42,7 +43,7 @@ container_scanning:
 
 deploy-stage:
   image: alpine/helm
-  stage: deploy
+  stage: deploy-staging
   script:
     - helm version
     - sed -i s%IMAGE_TAG_HOLDER%${CONTAINER_IMAGE}%g ./client/chart/values.yaml
@@ -56,11 +57,10 @@ dynamic-security-checking:
 
 deploy-prod:
   image: alpine/helm
-  stage: deploy
+  stage: deploy-prod
   script:
     -  echo "Approval Granted to deploy to production, deploying started"
   when: manual
   only:
     - master
-  needs: [dast]
-    
+  needs: [dynamic-security-checking]
