@@ -62,3 +62,5 @@ deploy-prod:
   when: manual
   only:
     - master
+  needs: [dynamic-security-checking]
+    
