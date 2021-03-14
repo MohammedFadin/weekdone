@@ -7,8 +7,6 @@ replicaCount: 1
 image:
   repository: IMAGE_TAG_HOLDER
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -43,8 +41,8 @@ service:
 env:
 ##non-sensitve data
   public:
-    CLIENT_PORT: 80
-    BACKEND_URL: weekdone-server 
+    CLIENT_PORT: 3000 ## referenced in deployment as well
+    BACKEND_URL: weekdone-server
     BACKEND_PORT: 80
 
 ingress:

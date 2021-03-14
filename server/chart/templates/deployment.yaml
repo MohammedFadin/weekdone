@@ -41,7 +41,7 @@ spec:
               name: {{ .Release.Name }}-secret
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.env.public.SERVER_PORT }}
               protocol: TCP
           livenessProbe:
             httpGet:
