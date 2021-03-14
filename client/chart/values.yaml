@@ -41,7 +41,7 @@ service:
 env:
 ##non-sensitve data
   public:
-    CLIENT_PORT: 3000
+    CLIENT_PORT: 3000 ## referenced in deployment as well
     BACKEND_URL: weekdone-server
     BACKEND_PORT: 80
 
