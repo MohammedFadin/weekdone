@@ -1,11 +1,17 @@
 FROM node:12
 
-COPY ./ /app
+ARG app_path=/home/node/app
 
-WORKDIR /app
+RUN mkdir $app_path && chown -R node:node $app_path
 
-RUN npm install
+COPY --chown=node:node ./ $app_path
 
-EXPOSE 80
+WORKDIR $app_path
 
-CMD npm start
+USER node
+
+RUN npm ci
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

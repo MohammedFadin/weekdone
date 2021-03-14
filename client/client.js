@@ -8,7 +8,7 @@ const backend_endpoint = process.env.BACKEND_URL+':'+process.env.BACKEND_PORT
 let healthcheck = new health.HealthChecker()
 
 const app = express()
-const port = process.env.CLIENT_PORT || 4444
+const port = process.env.CLIENT_PORT || 3000
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));

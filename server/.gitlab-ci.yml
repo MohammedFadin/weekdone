@@ -47,7 +47,6 @@ deploy-stage:
   script:
     - helm version
     - sed -i s%IMAGE_TAG_HOLDER%${CONTAINER_IMAGE}%g ./server/chart/values.yaml
-    - cat ./server/chart/values.yaml
     - helm upgrade --install --wait $APPLICATION_NAME -n $NAMESPACE ./server/chart
 
 dynamic-security-checking:
