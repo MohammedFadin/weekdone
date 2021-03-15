@@ -34,6 +34,10 @@ app.get('/api/entries', (req, res) => {
     })
 })
 
+app.get('/about', (req, res) => {
+    res.json({msg: "This is Fadin!"})
+})
+
 app.listen(port, () => {
     console.log(`WeekDone Client App Listening on port ${port}`)
 })
