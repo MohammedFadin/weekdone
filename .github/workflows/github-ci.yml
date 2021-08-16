@@ -22,7 +22,7 @@ on:
     types: [opened, deleted, created]
 
 env:
-  AZURE_WEBAPP_NAME: weekdone-client    # set this to your application's name
+  AZURE_WEBAPP_NAME: weekdone    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '10.x'                # set this to the node version to use
 
@@ -37,20 +37,12 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ env.NODE_VERSION }}
-    - name: Client npm build and install
+    - name: Weekdone Client npm build and Install
       run: |
         pwd
         ls -la
         cd ./client
-        npm ci
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Run Azure Apps query command
-      run: |
-       "az webapp list --query "[?state=='Running']"
-       
+        npm ci       
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
