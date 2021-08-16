@@ -17,10 +17,7 @@
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 name: manual workflow
 on:
-  workflow_dispatch
-  
-name: manual workflow
-on:
+  workflow_dispatch:
   repository_dispatch:
     types: [opened, deleted, created]
 
