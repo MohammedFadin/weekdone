@@ -43,6 +43,14 @@ jobs:
         ls -la
         cd ./client
         npm ci
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Run Azure Apps query command
+      run: |
+       "az webapp list --query "[?state=='Running']"
+       
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
