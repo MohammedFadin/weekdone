@@ -42,9 +42,7 @@ jobs:
         pwd
         ls -la
         cd ./client
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        npm ci
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
