@@ -37,6 +37,10 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ env.NODE_VERSION }}
+    - name: Snyk Scan
+      uses: eeveebank/github-actions-snyk@1.0.6
+      with:
+        type: iac
     - name: Weekdone Client npm build and Install
       run: |
         npm ci
