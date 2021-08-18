@@ -29,9 +29,8 @@ env:
 jobs:
   sast-scan:
     name: Snyk Scan
+    runs-on: ubuntu-latest
     uses: eeveebank/github-actions-snyk@1.0.6
-    with:
-      type:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
