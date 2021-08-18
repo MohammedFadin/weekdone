@@ -22,6 +22,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: NodeJsScan Scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: "."
       - name: Weekdone Client npm build and Install
         run: |
           npm ci
