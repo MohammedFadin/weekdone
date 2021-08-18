@@ -27,6 +27,11 @@ env:
   NODE_VERSION: '10.x'                # set this to the node version to use
 
 jobs:
+  sast-scan:
+    name: Snyk Scan
+    uses: eeveebank/github-actions-snyk@1.0.6
+    with:
+      type:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
