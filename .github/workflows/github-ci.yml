@@ -12,6 +12,22 @@ env:
   NODE_VERSION: "10.x" # set this to the node version to use
 
 jobs:
+  NodeJSScan-SAST:
+    name: NodeJS Code Scanning SAST
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.JS ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: NodeJsScan Scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: "."
+
   build-and-deploy:
     name: Build and Install NPM packages
     runs-on: ubuntu-latest
@@ -22,11 +38,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: NodeJsScan Scan
-        id: njsscan
-        uses: ajinabraham/njsscan-action@master
-        with:
-          args: "."
       - name: Weekdone Client npm build and Install
         run: |
           npm ci
