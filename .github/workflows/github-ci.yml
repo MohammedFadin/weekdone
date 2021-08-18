@@ -30,6 +30,7 @@ jobs:
 
   build-and-deploy:
     name: Build and Install NPM packages
+    depends: NodeJSScan-SAST
     runs-on: ubuntu-latest
     environment: production
     steps:
